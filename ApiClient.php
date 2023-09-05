@@ -1,6 +1,7 @@
 <?php
 
-class ApiClient{
+class ApiClient
+{
     private $base_url;
 
     public function __construct($base_url)
@@ -11,9 +12,10 @@ class ApiClient{
 
     //MAKE A GET API REQUEST
 
-    public function get($endpoint){
+    public function get($endpoint)
+    {
 
-        //Defino el endpoint que se introducirá a la hora de instanciar el método.
+        //Defino la ruta, que es la url+el endpoint que se introducirá a la hora de instanciar el método.
         $url = $this->base_url . $endpoint;
 
         //Realizo solicitud HTTP GET a la API
@@ -31,8 +33,11 @@ class ApiClient{
         }
     }
 
+        //MAKE A PUT API REQUEST
+
+    
+
+
 }
-
-
 
 ?>
