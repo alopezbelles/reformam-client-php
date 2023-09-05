@@ -10,7 +10,7 @@ class ApiClient
     }
 
 
-    //GET METHOD: make a GET API REQUEST
+    //GET METHOD
 
     public function get($endpoint)
     {
@@ -33,9 +33,10 @@ class ApiClient
         }
     }
 
-        //POST and PATCH METHOD: send an API REQUEST
+    //POST and PATCH METHOD: send an API REQUEST
 
-    public function sendRequest($method, $endpoint, $postData){
+    public function sendRequest($method, $endpoint, $postData)
+    {
 
         //URL completa incluyendo el endpoint
         $url = $this->base_url . $endpoint;
@@ -47,7 +48,7 @@ class ApiClient
                 'header' => 'Content-type: application/json; charset=UTF-8',
                 'content' => json_encode($postData),
             ]
-            ];
+        ];
 
         //Creo un contexto para la solicitud
         $context = stream_context_create($options);
@@ -59,8 +60,36 @@ class ApiClient
         $responseData = json_decode($response, true);
 
         //Verifico si la solicitud POST ha tenido exito. 
-        if($responseData){
+        if ($responseData) {
             return $responseData;
+        } else {
+            return false;
+        }
+    }
+
+    //DELETE METHOD
+
+    public function delete($endpoint){
+
+        //URL completa incluyendo el endpoint
+        $url = $this->base_url . $endpoint;
+
+        //Configuro las opciones de la solicitud DELETE
+        $options = [
+            'http' => [
+                'method' => 'DELETE',
+            ],
+        ];
+
+        //Creo un contexto para la solicitud
+        $context = stream_context_create($options);
+
+        //Realizo la solicitud DELETE
+        $response = file_get_contents($url, false, $context);
+
+        //Verifico si la solicitud DELETE ha sido exitosa
+        if($response !== false){
+            return true;
         } else {
             return false;
         }

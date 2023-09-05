@@ -20,7 +20,7 @@ if ($posts) {
         echo "<hr>";
     }
 } else {
-    echo "Error: no se pudo obtener información de los posts.";
+    echo "Error: no information could be obtained from the posts.";
 }
 
 /////REALIZO UNA SOLICITUD POST a la API./////
@@ -39,26 +39,39 @@ $postResponse = $apiClient->sendRequest('POST', 'posts', $postData);
 
 //Verifico si la solicitus POST ha sido exitosa y muestro la respuesta
 if ($postResponse) {
-    echo "Respuesta POST exitosa:<br>";
+    echo "Successful POST response:<br>";
     print_r($postResponse);
 } else {
-    echo "La solicitud POST ha fallado";
+    echo "POST request failed";
 }
 
 /////REALIZO UNA SOLICITUD PATCH a la API./////
 
 $patchData = [
-    'title' => 'nuevo título',
+    'title' => 'new title',
 ];
 
 $patchResponse = $apiClient->sendRequest('PATCH', 'patch/1', $patchData);
 
 //Verifico si la solicitud PATCH ha sido exitosa y muestro la respuesta
-if($patchResponse){
-    echo "Solicitud PATCH exitosa:<br>";
+if ($patchResponse) {
+    echo "PATCH request SUCCESSFUL:<br>";
     print_r($patchResponse);
 } else {
-    echo "La solicitud PATCH falló o los datos no se han actualizado correctamente";
+    echo "PATCH request failed or data has not been updated properly";
+}
+
+
+/////REALIZO UNA SOLICITUD DELETE a la API./////
+
+$deleteEndpoint = 'posts/1';
+$deleteResult = $apiClient->delete($deleteEndpoint);
+
+//Verifico si la solicitud DELETE ha sido exitosa
+if ($deleteResult) {
+    echo "DELETE request SUCCESSFUL. The resource was correctly deleted";
+} else {
+    echo "DELETE request FAILED, or the resource could not be deleted ";
 }
 
 ?>
