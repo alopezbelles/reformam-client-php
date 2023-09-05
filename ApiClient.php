@@ -10,7 +10,7 @@ class ApiClient
     }
 
 
-    //MAKE A GET API REQUEST
+    //GET METHOD: make a GET API REQUEST
 
     public function get($endpoint)
     {
@@ -33,9 +33,38 @@ class ApiClient
         }
     }
 
-        //MAKE A PUT API REQUEST
+        //PUT METHOD: make a PUT API REQUEST
 
-    
+    public function post($endpoint, $postData){
+
+        //URL completa incluyendo el endpoint
+        $url = $this->base_url . $endpoint;
+
+        //Configuro las opciones de la solicitud POST
+        $options = [
+            'http' => [
+                'method' => 'POST',
+                'header' => 'Content-type: application/json; charset=UTF-8',
+                'content' => json_encode($postData),
+            ]
+            ];
+
+        //Creo un contexto para la solicitud
+        $context = stream_context_create($options);
+
+        //Realizo la solicitud POST
+        $response = file_get_contents($url, false, $context);
+
+        //Decodifico la respuesta JSON
+        $responseData = json_decode($response, true);
+
+        //Verifico si la solicitud POST ha tenido exito. 
+        if($responseData){
+            return $responseData;
+        } else {
+            return false;
+        }
+    }
 
 
 }
