@@ -1,4 +1,4 @@
-# reformam-client-php
+# Reformam-client-php
 Proyecto BackEnd desarrollado en PHP. 
 
  ### Descripción general del proyecto 
@@ -20,7 +20,8 @@ Clase desarrollada en PHP modular y reutilizable.
     - Verifico si la solicitud ha sido exitosa.
       
       ### Método POST y PATCH: sendRequest().
-      - Defino el método sendRequest() que sirve tanto para la solicitud POST a la API como para la solicitud PATCH. Introduzco por parámetros tanto el $method, el $endpoint como $postData, que es la información que contendrá el POST o los parámetros a modificar del PATCH.
+      - Defino el método sendRequest() que sirve tanto para la solicitud POST a la API como para la solicitud PATCH. Introduzco por parámetros tanto el $method, el   
+       $endpoint como $postData, que es la información que contendrá el POST o los parámetros a modificar del PATCH.
       -  La $url es url+endpoint.
       -  Configuro las opciones de la solicitud en un array. Estas opciones incluyen:
          - 'method' => definiremos al método en la instancia.
@@ -29,7 +30,17 @@ Clase desarrollada en PHP modular y reutilizable.
       - Creo un contexto para la solicitud con stream_context_create.
       - Realizo la solicitud utilizando "file_get_contents()".
       - Decodifico la respuesta JSON usando json_decode().
-      - Verifico si la solicitud ha sido exitosa. 
+      - Verifico si la solicitud ha sido exitosa.
+     
+       ### Método DELETE
+      - Defino el método delete() para una solicitud DELETE a la API e introduzco el $endpoint como único parámetro.
+      - La $url es url+endpoint.
+      - Configuro las opciones de la solicitud en un array $options, que incluye el 'method' Delete y especifica el tipo de petición que se va a realizar.
+      - Creo un contexto para la solicitud con stream_context_create.
+      - Realizo la solicitud utilizando "file_get_contents()".
+      - Decodifico la respuesta JSON usando json_decode().
+      - Verifico si la solicitud ha sido exitosa.
+
    
     
 
@@ -57,6 +68,15 @@ Clase desarrollada en PHP modular y reutilizable.
     - Introduzco el $method (patch), el $endpoint y los datos $patchData como argumentos.
     - Defino un array como $patchData con la información a modidificar. En el caso del ejemplo sería 'title'.
     - Llamo al método  sebdRequest() de la instancia ApiClient para realizar la solicitud.
-    - Verifico si los datos se han obtenido correctamente, mostrando un mensaje de éxito o un mensaje de fallo. 
+    - Verifico si los datos se han obtenido correctamente, mostrando un mensaje de éxito o un mensaje de fallo.
+   
+      ### Solicitud DELETE
+    - Realizo una solicitud DELETE a la API utilizando el método delete().
+    - Declaro el $deleteEndpoint.
+    - Llamo al método delete() de la instancia ApiClient e introduzco el $endpoint como argumento.
+    - Verifico si los datos se han obtenido correctamente.
+   
+ 
+
   
  
