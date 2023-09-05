@@ -9,10 +9,10 @@ $apiBaseUrl = 'https://jsonplaceholder.typicode.com/';
 //Creo una instancia del cliente API
 $apiClient = new ApiClient($apiBaseUrl);
 
-        /////Realizo una solicitud GET a la API, y defino el endpoint 'posts'./////
+/////REALIZO UNA SOLICITUD GET a la API./////
 $posts = $apiClient->get('posts');
 
-        //Verifico si la solicitud GET ha sido exitosa y muestro los resultados
+//Verifico si la solicitud GET ha sido exitosa y muestro los resultados
 if ($posts) {
     foreach ($posts as $post) {
         echo "Title: " . $post['title'] . "<br>";
@@ -23,25 +23,42 @@ if ($posts) {
     echo "Error: no se pudo obtener información de los posts.";
 }
 
-        /////Realizo una solicitud POST a la API./////
+/////REALIZO UNA SOLICITUD POST a la API./////
 
-         // defino el endpoint y los datos para la solicitud
+// defino  los datos para la solicitud POST.
 $endpoint = 'posts';
+
 $postData = [
     'title' => 'foo',
     'body' => 'bar',
     'userId' => 1,
 ];
 
-        //Realizo la solicitud POST
-$postResponse = $apiClient->post($endpoint, $postData);
+//Realizo la solicitud POST
+$postResponse = $apiClient->sendRequest('POST', 'posts', $postData);
 
 //Verifico si la solicitus POST ha sido exitosa y muestro la respuesta
-if($postResponse){
+if ($postResponse) {
     echo "Respuesta POST exitosa:<br>";
+    print_r($postResponse);
 } else {
     echo "La solicitud POST ha fallado";
 }
 
+/////REALIZO UNA SOLICITUD PATCH a la API./////
+
+$patchData = [
+    'title' => 'nuevo título',
+];
+
+$patchResponse = $apiClient->sendRequest('PATCH', 'patch/1', $patchData);
+
+//Verifico si la solicitud PATCH ha sido exitosa y muestro la respuesta
+if($patchResponse){
+    echo "Solicitud PATCH exitosa:<br>";
+    print_r($patchResponse);
+} else {
+    echo "La solicitud PATCH falló o los datos no se han actualizado correctamente";
+}
 
 ?>

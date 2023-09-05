@@ -33,9 +33,9 @@ class ApiClient
         }
     }
 
-        //PUT METHOD: make a PUT API REQUEST
+        //POST and PATCH METHOD: send an API REQUEST
 
-    public function post($endpoint, $postData){
+    public function sendRequest($method, $endpoint, $postData){
 
         //URL completa incluyendo el endpoint
         $url = $this->base_url . $endpoint;
@@ -43,7 +43,7 @@ class ApiClient
         //Configuro las opciones de la solicitud POST
         $options = [
             'http' => [
-                'method' => 'POST',
+                'method' => $method,
                 'header' => 'Content-type: application/json; charset=UTF-8',
                 'content' => json_encode($postData),
             ]
@@ -52,7 +52,7 @@ class ApiClient
         //Creo un contexto para la solicitud
         $context = stream_context_create($options);
 
-        //Realizo la solicitud POST
+        //Realizo la solicitud 
         $response = file_get_contents($url, false, $context);
 
         //Decodifico la respuesta JSON
